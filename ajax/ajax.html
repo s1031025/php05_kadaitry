@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>method_ajax0.html</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+            //この中に処理を記述 開始
+
+            //Ajax（非同期通信）//AJAX通信(ver1.5...)
+            $.ajax({
+                type: 'POST', //GET,POST
+                url: 'ajax.php', //通信先URL
+                data: { //Dataプロパティはデータを送信（渡す）役目
+                    id: 1,
+                    mode: 'hoge',
+                    type: 'entry',
+                    sleep: 4 //Timeoutテスト用
+                },
+                dataType: 'json', //text, html, xml, json, jsonp, script
+                timeout: 3000,
+                success: function (data) {
+                    $("#ajax_status").html(data);
+                    console.log(data);
+                },
+                error: function (error) {
+                    console.log(error); //戻り値Allオブジェクト
+                },
+                complete: function () {
+                    //成功＆エラー処理後に必ず実行したい処理を記述する
+                    $("body").append("完了"); //戻り値Allオブジェクト
+                }
+            });
+
+
+            //この中に処理を記述 終了
+        });
+    </script>
+</head>
+
+<body>
+    <h1 id="ajax_status">Ajax通信中...</h1>
+</body>
+
+</html>
